@@ -9,8 +9,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Task {
-    private String name;
-    private String time;
+    private final String name;
+    private final String time;
     private int duration;
 
     public Task(String name, String time) {
@@ -46,10 +46,11 @@ public class Task {
         List<String> lines = Files.lines(path).collect(Collectors.toList());
         List<Task> tasks = new ArrayList<>();
         lines.forEach(x->tasks.add(new Task(x.split(" ")[1],x.split(" ")[0])));
+        setTasksDuration(tasks);
         return tasks;
     }
 
-    public static List<Task> setTasksDuration(List<Task> tasks) {
+    private static List<Task> setTasksDuration(List<Task> tasks) {
         for (int i = 0; i <= tasks.size() - 2; i++) {
             int minutesOfDayCurrent = tasks.get(i).getMinutes();
             int minutesOfDayNext = tasks.get(i + 1).getMinutes();

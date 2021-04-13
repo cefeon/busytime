@@ -5,8 +5,6 @@ import com.cefeon.busytime.Log;
 import com.cefeon.busytime.Task;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class Print implements Command {
@@ -17,21 +15,18 @@ public class Print implements Command {
             return;
         }
 
-        final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-
         try {
-            LocalDate dateFromParam = args[1].equals("today") ? LocalDate.now() : LocalDate.parse(args[1], dateFormat);
-            Day date = new Day(dateFromParam.atTime(0, 0));
+            Day date = new Day(args[1]);
             print(date);
         } catch (DateTimeParseException e) {
             Log.INFO("Date format wrong.\nuse: dd-mm-yyyy\nexample: 21-04-2000");
         } catch (IOException e) {
-            Log.INFO("There is no log for that date");;
+            Log.INFO("There is no log for that date");
         }
     }
 
-    private void print(Day date) throws IOException{
+    private void print(Day date) throws IOException {
         Log.INFO("Tasks for " + date.toDate());
-        Task.listFromFile(date).forEach(System.out::println);
+        Task.listFromFile(date).forEach(x->Log.INFO(x.toString()));
     }
 }
