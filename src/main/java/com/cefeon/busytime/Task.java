@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Task {
     private final String name;
@@ -43,11 +44,13 @@ public class Task {
     public static List<Task> listFromFile(Day date) throws IOException {
         String filePath = date.toFileName();
         Path path = Paths.get(filePath);
-        List<String> lines = Files.lines(path).collect(Collectors.toList());
-        List<Task> tasks = new ArrayList<>();
-        lines.forEach(x->tasks.add(new Task(x.split(" ",2)[1],x.split(" ",2)[0])));
-        setTasksDuration(tasks);
-        return tasks;
+        try(Stream<String> stream = Files.lines(path)) {
+            List<String> lines = stream.collect(Collectors.toList());
+            List<Task> tasks = new ArrayList<>();
+            lines.forEach(x -> tasks.add(new Task(x.split(" ", 2)[1], x.split(" ", 2)[0])));
+            setTasksDuration(tasks);
+            return tasks;
+        }
     }
 
     private static List<Task> setTasksDuration(List<Task> tasks) {

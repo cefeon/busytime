@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Rm implements Command {
     private final Day now = new Day(LocalDateTime.now());
@@ -40,16 +41,20 @@ public class Rm implements Command {
     }
 
     private void removeTaskByName(Path file, String taskname) throws IOException {
-        List<String> lines = Files.lines(file)
-                .filter(x->!(x.matches(".*?"+taskname+"$")))
-                .collect(Collectors.toList());
-        Files.write(file,lines);
+        try (Stream<String> stream = Files.lines(file)){
+            List<String> lines = stream
+                    .filter(x -> !(x.matches(".*?" + taskname + "$")))
+                    .collect(Collectors.toList());
+            Files.write(file, lines);
+        }
     }
 
     private void removeLastLine(Path file) throws IOException {
-        List<String> lines = Files.lines(file)
-                .collect(Collectors.toList());
-        lines.remove(lines.size() - 1);
-        Files.write(file,lines);
+        try (Stream<String> stream = Files.lines(file)) {
+            List<String> lines = stream
+                    .collect(Collectors.toList());
+            lines.remove(lines.size() - 1);
+            Files.write(file, lines);
+        }
     }
 }
