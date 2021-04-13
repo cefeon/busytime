@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CommandFactory {
+    private CommandFactory(){}
     private static final Map<String, Command> commandMap = new HashMap<>();
 
     static {
@@ -13,6 +14,7 @@ public class CommandFactory {
         commandMap.put("help", new Help());
         commandMap.put("sum", new Sum());
         commandMap.put("print", new Print());
+        commandMap.put("rm", new Rm());
     }
 
     static Boolean commandExist(String command) {

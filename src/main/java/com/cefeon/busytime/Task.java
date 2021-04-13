@@ -31,13 +31,13 @@ public class Task {
         return time;
     }
 
-    public void setDuration(int duration) {
+    private void setDuration(int duration) {
         this.duration = duration;
     }
 
-    public int getMinutes(){
-        int hours = Integer.parseInt(getTime().split(":")[0]);
-        return Integer.parseInt(getTime().split(":")[1]) + hours * 60;
+    private int getMinutes(){
+        int hours = Integer.parseInt(time.split(":")[0]);
+        return Integer.parseInt(time.split(":")[1]) + hours * 60;
     }
 
     public static List<Task> listFromFile(Day date) throws IOException {
@@ -45,7 +45,7 @@ public class Task {
         Path path = Paths.get(filePath);
         List<String> lines = Files.lines(path).collect(Collectors.toList());
         List<Task> tasks = new ArrayList<>();
-        lines.forEach(x->tasks.add(new Task(x.split(" ")[1],x.split(" ")[0])));
+        lines.forEach(x->tasks.add(new Task(x.split(" ",2)[1],x.split(" ",2)[0])));
         setTasksDuration(tasks);
         return tasks;
     }

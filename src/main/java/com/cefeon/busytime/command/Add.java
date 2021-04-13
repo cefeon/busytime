@@ -9,6 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 
 import static java.nio.file.StandardOpenOption.APPEND;
 
@@ -21,26 +22,26 @@ public class Add implements Command {
     @Override
     public void execute(String[] args) {
         if (args.length == 1) {
-            Log.INFO("What task to add? \nuse: bt add [task name]");
+            Log.info("What task to add? \nuse: bt add [task name]");
             return;
         }
-        String taskName = args[1];
+        String taskName = String.join(" ", Arrays.copyOfRange(args, 1, args.length));
 
         try {
             if (!Files.exists(file)) {
                 Files.createFile(file);
-                Log.INFO("\033[0;32m" + "Created daily file\033[0m " + file.getFileName().toString() + "\033[0m");
+                Log.info("\033[0;32m" + "Created daily file\033[0m " + file.getFileName().toString() + "\033[0m");
             }
         } catch (IOException e) {
-            Log.INFO("Error occurred.");
+            Log.info("Error occurred.");
         }
 
         try {
             String task = nowTime + " " + taskName + "\n";
             Files.write(file, task.getBytes(StandardCharsets.UTF_8), APPEND);
-            Log.INFO("\033[0;32mAdded task\033[0m " + taskName + "\033[0;32m at \033[0m" + nowTime);
+            Log.info("\033[0;32mAdded task\033[0m " + taskName + "\033[0;32m at \033[0m" + nowTime);
         } catch (IOException e) {
-            Log.INFO("Error occurred.");
+            Log.info("Error occurred.");
             e.printStackTrace();
         }
     }

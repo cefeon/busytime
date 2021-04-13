@@ -14,6 +14,7 @@ public class Help implements Command {
         helpMap.put("sum", "sum time for selected day and task");
         helpMap.put("print", "print tasks for selected day");
         helpMap.put("help", "print list of all commands");
-        helpMap.forEach((x, y) -> Log.INFO(x + " -> " + y));
+        helpMap.put("rm", "remove last added task");
+        helpMap.forEach((x, y) -> Log.info(x + " -> " + y));
     }
 }

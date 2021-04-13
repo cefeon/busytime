@@ -5,7 +5,7 @@ import com.cefeon.busytime.command.Command;
 public class Main {
     public static void main(String[] args) {
         if (args.length == 0) {
-            Log.INFO("Command required \nuse: bt help for list of commands");
+            Log.info("Command required \nuse: bt help for list of commands");
             return;
         }
         String commandName = args[0];
@@ -13,7 +13,7 @@ public class Main {
             Command targetCommand = CommandFactory.getCommand(commandName);
             targetCommand.execute(args);
         } else {
-            Log.INFO("Command doesn't exist");
+            Log.info("Command doesn't exist");
         }
     }
 }
