@@ -34,6 +34,7 @@ public class Add implements Command {
             }
         } catch (IOException e) {
             Log.info("Error occurred.");
+            e.printStackTrace();
         }
 
         try {
