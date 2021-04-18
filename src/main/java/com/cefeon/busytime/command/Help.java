@@ -9,11 +9,11 @@ public class Help implements Command {
 
     @Override
     public String execute(String[] args) {
-        helpMap.put("add [task name]", "add new task");
+        helpMap.put("add/[task name]", "add new task");
         helpMap.put("sum", "sum time for selected day and task");
         helpMap.put("print", "print tasks for selected day");
         helpMap.put("help", "print list of all commands");
-        helpMap.put("rm", "remove last added task");
+        helpMap.put("remove", "remove last added task");
         return helpMap.keySet().stream()
                 .map(key -> "<b>" + key + ": </b>" + helpMap.get(key))
                 .collect(Collectors.joining("<br /> ", "", ""));

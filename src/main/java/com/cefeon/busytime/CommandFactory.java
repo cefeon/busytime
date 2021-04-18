@@ -14,7 +14,7 @@ public class CommandFactory {
         commandMap.put("help", new Help());
         commandMap.put("sum", new Sum());
         commandMap.put("print", new Print());
-        commandMap.put("rm", new Rm());
+        commandMap.put("remove", new Remove());
     }
 
     static Command getCommand(String command) {

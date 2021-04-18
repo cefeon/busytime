@@ -12,11 +12,11 @@ public class Sum implements Command {
     @Override
     public String execute(String[] args) {
         if (args.length == 0) {
-            return "What day to count? \nuse: bt sum [date] [taskname]\nexample: bt sum 21-04-2000";
+            return "What day to count? <br />use: /sum/[date]/[taskname]<br />example: /sum/21-04-2000/task";
         }
 
         if (args.length == 1) {
-            return "What task to count? \nuse: bt sum [date] [taskname]\nexample: bt sum 21-04-2000";
+            return "What task to count? <br />use: /sum/[date]/[taskname]<br />example: /sum/21-04-2000/task";
         }
 
         try {
@@ -24,7 +24,7 @@ public class Sum implements Command {
             int duration = getTaskDuration(new Day(args[0]), taskName);
             return "<span style=\"color: #36d036\">Total </span>" + taskName + "<span style=\"color: #36d036\"> duration: </span>" + duration + " minutes";
         } catch (DateTimeParseException e) {
-            return "Date format wrong.\nuse: dd-mm-yyyy\nexample: 21-04-2000";
+            return "Date format wrong.<br />use: dd-mm-yyyy<br />example: 21-04-2000";
         } catch (IOException e) {
             return "There is no log for that date";
         }
