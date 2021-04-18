@@ -1,7 +1,6 @@
 package com.cefeon.busytime.command;
 
 import com.cefeon.busytime.Day;
-import com.cefeon.busytime.Log;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -18,26 +17,26 @@ public class Rm implements Command {
     private final Path file = Paths.get(nowFilename);
 
     @Override
-    public void execute(String[] args) {
-        if (args.length == 1) {
+    public String execute(String[] args) {
+        if (args.length == 0) {
             try{
                 removeLastLine(file);
-
-                Log.info("\033[0;32mRemoved last task\033[0m ");
+                return "<span style=\"color: #36d036\">Removed last task</span> ";
             } catch (IOException e) {
-                Log.info("Error occurred.");
+                return "Error occurred.";
             }
         }
 
-        if (args.length >= 2) {
+        if (args.length >= 1) {
             try{
-                String taskName = String.join(" ", Arrays.copyOfRange(args, 1, args.length));
+                String taskName = String.join(" ", Arrays.copyOfRange(args, 0, args.length));
                 removeTaskByName(file, taskName);
-                Log.info("\033[0;32mRemoved all tasks named\033[0m " + taskName);
+                return "<span style=\"color: #36d036\">Removed all tasks named</span> " + taskName;
             } catch (IOException e) {
-                Log.info("Error occurred.");
+                return "Error occurred.";
             }
         }
+        return "";
     }
 
     private void removeTaskByName(Path file, String taskname) throws IOException {

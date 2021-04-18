@@ -1,20 +1,21 @@
 package com.cefeon.busytime.command;
 
-import com.cefeon.busytime.Log;
-
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Help implements Command {
     final Map<String, String> helpMap = new HashMap<>();
 
     @Override
-    public void execute(String[] args) {
+    public String execute(String[] args) {
         helpMap.put("add [task name]", "add new task");
         helpMap.put("sum", "sum time for selected day and task");
         helpMap.put("print", "print tasks for selected day");
         helpMap.put("help", "print list of all commands");
         helpMap.put("rm", "remove last added task");
-        helpMap.forEach((x, y) -> Log.info(x + " -> " + y));
+        return helpMap.keySet().stream()
+                .map(key -> "<b>" + key + ": </b>" + helpMap.get(key))
+                .collect(Collectors.joining("<br /> ", "", ""));
     }
 }

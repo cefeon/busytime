@@ -20,17 +20,17 @@ public class Add implements Command {
     private final Path file = Paths.get(nowFilename);
 
     @Override
-    public void execute(String[] args) {
-        if (args.length == 1) {
-            Log.info("What task to add? \nuse: bt add [task name]");
-            return;
+    public String execute(String[] args) {
+        StringBuilder builder = new StringBuilder();
+        if (args.length == 0) {
+            return "What task to add? \nuse: bt add [task name]";
         }
-        String taskName = String.join(" ", Arrays.copyOfRange(args, 1, args.length));
+        String taskName = String.join(" ", Arrays.copyOfRange(args, 0, args.length));
 
         try {
             if (!Files.exists(file)) {
                 Files.createFile(file);
-                Log.info("\033[0;32m" + "Created daily file\033[0m " + file.getFileName().toString() + "\033[0m");
+                builder.append("<span style=\"color: #36d036\">" + "Created daily file </span> " + file.getFileName().toString() + "<br>");
             }
         } catch (IOException e) {
             Log.info("Error occurred.");
@@ -40,10 +40,10 @@ public class Add implements Command {
         try {
             String task = nowTime + " " + taskName + "\n";
             Files.write(file, task.getBytes(StandardCharsets.UTF_8), APPEND);
-            Log.info("\033[0;32mAdded task\033[0m " + taskName + "\033[0;32m at \033[0m" + nowTime);
+            builder.append("<span style=\"color: #36d036\">Added task </span> " + taskName + "<span style=\"color: #36d036\"> at </span> " + nowTime);
+            return builder.toString();
         } catch (IOException e) {
-            Log.info("Error occurred.");
-            e.printStackTrace();
+            return "Error occurred.";
         }
     }
 }

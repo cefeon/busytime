@@ -1,15 +1,32 @@
 plugins {
     id 'java'
+    id 'application'
+    id 'edu.sc.seis.launch4j' version '2.5.0'
+    id 'maven-publish'
+}
+
+ext {
+    javaMainClass = "com.cefeon.busytime.Main"
+}
+
+application {
+    mainClass = 'com.cefeon.busytime.Main'
 }
 
 group 'com.cefeon'
 version '1.0-SNAPSHOT'
 
-repositories {
-    mavenCentral()
+launch4j {
+    mainClassName = 'com.cefeon.busytime.Main'
+    jreMinVersion = '1.8'
+    outfile = 'bt.exe'
+    headerType = 'console'
 }
 
 dependencies {
+    implementation 'org.junit.jupiter:junit-jupiter:5.4.2'
+    implementation 'com.sparkjava:spark-core:2.9.3'
+    implementation 'org.slf4j:slf4j-simple:1.6.1'
 }
 
 test {

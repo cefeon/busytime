@@ -4,7 +4,6 @@ import com.cefeon.busytime.command.*;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 public class CommandFactory {
     private CommandFactory(){}
@@ -18,7 +17,10 @@ public class CommandFactory {
         commandMap.put("rm", new Rm());
     }
 
-    static Optional<Command> getCommand(String command) {
-        return Optional.ofNullable(commandMap.get(command));
+    static Command getCommand(String command) {
+        if (commandMap.containsKey(command)) {
+            return commandMap.get(command);
+        }
+        return new NotFound();
     }
 }
