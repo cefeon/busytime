@@ -8,7 +8,11 @@ import static spark.Spark.*;
 public class Main {
     public static void main(String[] args) {
         String contentStyle= "<span style=\"font-size: 26px\">";
-        port(654);
+        if (args.length>=1) {
+            port(Integer.parseInt(args[0]));
+        } else {
+            port(7777);
+        }
 
         get("/:commandName/", (request, response) -> {
             String commandName = request.params(":commandName");
