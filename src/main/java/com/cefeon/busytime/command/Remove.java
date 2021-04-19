@@ -35,10 +35,10 @@ public class Remove implements Command {
         }
     }
 
-    private void removeTaskByName(Path file, String taskname) throws IOException {
+    private void removeTaskByName(Path file, String taskName) throws IOException {
         try (Stream<String> stream = Files.lines(file)){
             Deque<String> lines = stream
-                    .filter(x -> !(x.matches(".*?" + taskname + "$")))
+                    .filter(x -> !(x.matches(".*?" + taskName + "$")))
                     .collect(Collectors.toCollection(ArrayDeque::new));
             Files.write(file, lines);
         }

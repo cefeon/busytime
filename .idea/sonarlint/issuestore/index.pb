@@ -29,5 +29,13 @@ d
 4src/main/java/com/cefeon/busytime/command/Print.java,5\f\5f4483b473583e4a7ed158f4644f2938c3a359ac
 B
 13kwietnia2021.txt,b\a\bae6ce9803ca686feaa36740962b1d03ff68db64
-a
-1src/main/java/com/cefeon/busytime/command/Rm.java,0\5\05d0c65c4f306d564782d4e26b330b783a1a1353
+M
+src/test/META-INF/MANIFEST.MF,4\4\446118ba1fdc56db80c6da4dce3f7e8824604746
+B
+18kwietnia2021.txt,d\8\d84b456f9a214a29da9e6de40e339ebfea509faf
+g
+7src/main/java/com/cefeon/busytime/command/NotFound.java,9\d\9d07c27b782a58c0def431b351ef6609f2c35670
+e
+5src/main/java/com/cefeon/busytime/command/Remove.java,5\9\5923727eb39a2f1be266e0cb140d94bf1b26dafc
+B
+19kwietnia2021.txt,c\f\cfdb213cf42d326a1962af8436b2e30285fa520a

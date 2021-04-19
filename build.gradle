@@ -3,6 +3,7 @@ plugins {
     id 'application'
     id 'edu.sc.seis.launch4j' version '2.5.0'
     id 'maven-publish'
+    id "com.github.johnrengelman.shadow" version "5.2.0"
 }
 
 ext {
@@ -16,10 +17,14 @@ application {
 group 'com.cefeon'
 version '1.0-SNAPSHOT'
 
-launch4j {
+shadowJar{
     mainClassName = 'com.cefeon.busytime.Main'
-    jreMinVersion = '1.8'
+}
+launch4j {
     outfile = 'bt.exe'
+    mainClassName = 'com.cefeon.busytime.Main'
+    copyConfigurable = []
+    jarTask = project.tasks.shadowJar as Task
     headerType = 'console'
 }
 
@@ -27,6 +32,7 @@ dependencies {
     implementation 'org.junit.jupiter:junit-jupiter:5.4.2'
     implementation 'com.sparkjava:spark-core:2.9.3'
     implementation 'org.slf4j:slf4j-simple:1.6.1'
+    implementation 'com.github.jengelman.gradle.plugins:shadow:5.2.0'
 }
 
 test {
