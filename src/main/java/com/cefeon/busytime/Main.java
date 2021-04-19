@@ -9,7 +9,11 @@ public class Main {
     public static void main(String[] args) {
         String contentStyle= "<span style=\"font-size: 26px\">";
         if (args.length>=1) {
-            port(Integer.parseInt(args[0]));
+            try {
+                port(Integer.parseInt(args[0]));
+            } catch (NumberFormatException e){
+                Log.info("This port number is not a number.");
+            }
         } else {
             port(7777);
         }
