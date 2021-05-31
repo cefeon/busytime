@@ -23,18 +23,18 @@ public class Remove implements Command {
         if (args.length == 0) {
             try{
                 removeLastLine(file);
-                return new JsonResponse("Removed last task").toGson();
+                return new JsonResponse("Removed last task").createJSON();
             } catch (IOException e) {
-                return new JsonError(500, "Error occurred.").toGson();
+                return new JsonError(500, "Error occurred.").createJSON();
             }
         }
 
         try{
             String taskName = String.join(" ", args);
             removeTaskByName(file, taskName);
-            return new JsonResponse("Removed all tasks named " + taskName).toGson();
+            return new JsonResponse("Removed all tasks named " + taskName).createJSON();
         } catch (IOException e) {
-            return new JsonError(500, "Error occurred.").toGson();
+            return new JsonError(500, "Error occurred.").createJSON();
         }
     }
 

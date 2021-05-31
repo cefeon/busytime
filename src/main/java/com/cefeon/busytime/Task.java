@@ -11,12 +11,12 @@ import java.util.stream.Stream;
 
 public class Task {
     private final String name;
-    private final String time;
+    private final String startTime;
     private int duration;
 
     public Task(String name, String time) {
         this.name = name;
-        this.time = time;
+        this.startTime = time;
         this.duration = 0;
     }
 
@@ -28,8 +28,8 @@ public class Task {
         return name;
     }
 
-    public String getTime() {
-        return time;
+    public String getStartTime() {
+        return startTime;
     }
 
     private void setDuration(int duration) {
@@ -37,8 +37,8 @@ public class Task {
     }
 
     private int getMinutes(){
-        int hours = Integer.parseInt(time.split(":")[0]);
-        return Integer.parseInt(time.split(":")[1]) + hours * 60;
+        int hours = Integer.parseInt(startTime.split(":")[0]);
+        return Integer.parseInt(startTime.split(":")[1]) + hours * 60;
     }
 
     public static List<Task> listFromFile(Day date) throws IOException {
@@ -64,6 +64,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return name + " " + time;
+        return name + " " + startTime;
     }
 }

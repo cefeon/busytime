@@ -8,9 +8,9 @@ import java.util.List;
 public class JsonResponse {
     private String message;
     private int status = 200;
-    private List<String> data = new ArrayList<>();
+    private List<Object> data = new ArrayList<>();
 
-    public void addData(String data) {
+    public void addData(Object data) {
         this.data.add(data);
     }
 
@@ -18,7 +18,7 @@ public class JsonResponse {
         this.message = message;
     }
 
-    public String toGson(){
+    public String createJSON(){
         Gson g = new Gson();
         return g.toJson(this);
     }

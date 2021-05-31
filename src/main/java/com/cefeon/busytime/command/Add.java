@@ -21,14 +21,14 @@ public class Add implements Command {
     @Override
     public String execute(String[] args) {
         if (args.length == 0) {
-            return new JsonError(404,"What task to add? Use: add [task name]").toGson();
+            return new JsonError(404,"What task to add? Use: add [task name]").createJSON();
         }
         String taskName = String.join(" ", args);
 
         try {
             if (!Files.exists(file)) {
                 Files.createFile(file);
-                return new JsonResponse("Created daily file " + file.getFileName().toString()).toGson();
+                return new JsonResponse("Created daily file " + file.getFileName().toString()).createJSON();
             }
         } catch (IOException e) {
             Log.info("Error occurred.");
@@ -38,9 +38,9 @@ public class Add implements Command {
         try {
             String task = nowTime + " " + taskName + "\n";
             Files.write(file, task.getBytes(StandardCharsets.UTF_8), APPEND);
-            return new JsonResponse("Added task " + taskName + " at " + nowTime).toGson();
+            return new JsonResponse("Added task " + taskName + " at " + nowTime).createJSON();
         } catch (IOException e) {
-            return new JsonResponse("Error occurred.").toGson();
+            return new JsonResponse("Error occurred.").createJSON();
         }
     }
 }
