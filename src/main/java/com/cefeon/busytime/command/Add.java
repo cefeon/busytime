@@ -1,15 +1,15 @@
 package com.cefeon.busytime.command;
 
 import com.cefeon.busytime.Day;
+import com.cefeon.busytime.JsonError;
+import com.cefeon.busytime.JsonResponse;
 import com.cefeon.busytime.Log;
-
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
-import java.util.Arrays;
 
 import static java.nio.file.StandardOpenOption.APPEND;
 
@@ -18,19 +18,17 @@ public class Add implements Command {
     private final String nowFilename = now.toFileName();
     private final String nowTime = now.toTime();
     private final Path file = Paths.get(nowFilename);
-
     @Override
     public String execute(String[] args) {
-        StringBuilder builder = new StringBuilder();
         if (args.length == 0) {
-            return "What task to add? \nuse: bt add [task name]";
+            return new JsonError(404,"What task to add? Use: add [task name]").toGson();
         }
-        String taskName = String.join(" ", Arrays.copyOfRange(args, 0, args.length));
+        String taskName = String.join(" ", args);
 
         try {
             if (!Files.exists(file)) {
                 Files.createFile(file);
-                builder.append("<span style=\"color: #36d036\">" + "Created daily file </span> " + file.getFileName().toString() + "<br>");
+                return new JsonResponse("Created daily file " + file.getFileName().toString()).toGson();
             }
         } catch (IOException e) {
             Log.info("Error occurred.");
@@ -40,10 +38,9 @@ public class Add implements Command {
         try {
             String task = nowTime + " " + taskName + "\n";
             Files.write(file, task.getBytes(StandardCharsets.UTF_8), APPEND);
-            builder.append("<span style=\"color: #36d036\">Added task </span> " + taskName + "<span style=\"color: #36d036\"> at </span> " + nowTime);
-            return builder.toString();
+            return new JsonResponse("Added task " + taskName + " at " + nowTime).toGson();
         } catch (IOException e) {
-            return "Error occurred.";
+            return new JsonResponse("Error occurred.").toGson();
         }
     }
 }

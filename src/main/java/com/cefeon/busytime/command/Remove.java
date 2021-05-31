@@ -1,6 +1,9 @@
 package com.cefeon.busytime.command;
 
 import com.cefeon.busytime.Day;
+import com.cefeon.busytime.JsonError;
+import com.cefeon.busytime.JsonResponse;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -20,18 +23,18 @@ public class Remove implements Command {
         if (args.length == 0) {
             try{
                 removeLastLine(file);
-                return "<span style=\"color: #36d036\">Removed last task</span> ";
+                return new JsonResponse("Removed last task").toGson();
             } catch (IOException e) {
-                return "Error occurred.";
+                return new JsonError(500, "Error occurred.").toGson();
             }
         }
 
         try{
-            String taskName = String.join(" ", Arrays.copyOfRange(args, 0, args.length));
+            String taskName = String.join(" ", args);
             removeTaskByName(file, taskName);
-            return "<span style=\"color: #36d036\">Removed all tasks named</span> " + taskName;
+            return new JsonResponse("Removed all tasks named " + taskName).toGson();
         } catch (IOException e) {
-            return "Error occurred.";
+            return new JsonError(500, "Error occurred.").toGson();
         }
     }
 

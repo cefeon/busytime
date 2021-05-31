@@ -17,7 +17,7 @@ public class CommandFactory {
         commandMap.put("remove", new Remove());
     }
 
-    static Command getCommand(String command) {
+    public static Command getCommand(String command) {
         if (commandMap.containsKey(command)) {
             return commandMap.get(command);
         }
