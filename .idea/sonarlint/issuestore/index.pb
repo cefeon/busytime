@@ -3,17 +3,7 @@ J
 .idea/artifacts/bt_jar.xml,3\2\3274c4b868746f48c62b120a526e6e532012c596
 J
 .idea/modules/busytime.iml,4\f\4f1a035228159e01aae085f288d16800e188562d
-B
-13kwietnia2021.txt,b\a\bae6ce9803ca686feaa36740962b1d03ff68db64
 M
 src/test/META-INF/MANIFEST.MF,4\4\446118ba1fdc56db80c6da4dce3f7e8824604746
-B
-19kwietnia2021.txt,c\f\cfdb213cf42d326a1962af8436b2e30285fa520a
 ?
 settings.gradle,0\5\05efc8b1657769a27696d478ded1e95f38737233
->
-17maja2021.txt,1\f\1f613b574e2f33319940517021e1c38554ca5307
-B
-18kwietnia2021.txt,d\8\d84b456f9a214a29da9e6de40e339ebfea509faf
->
-31maja2021.txt,1\c\1cef339a520a326e37a4041860063e26c9c377e9
