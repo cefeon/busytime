@@ -10,14 +10,14 @@ import java.time.format.DateTimeParseException;
 public class Print implements Command {
 
     @Override
-    public String execute(String[] args) {
+    public String execute(String[] args, String listNumbers) {
         if (args.length == 0) {
             return new JsonError(404, "What day to print? use: /print/[date] example: /print/21-04-2000").createJSON();
         }
 
         try {
             Day date = new Day(args[0]);
-            return print(date);
+            return print(date, listNumbers);
         } catch (DateTimeParseException e) {
             return new JsonError(404, "Date format wrong. Use: dd-mm-yyyy. example: 21-04-2000").createJSON();
         } catch (IOException e) {
@@ -25,9 +25,9 @@ public class Print implements Command {
         }
     }
 
-    private String print(Day date) throws IOException {
+    private String print(Day date, String listNumbers) throws IOException {
         JsonResponse jr = new JsonResponse("Tasks done " + date.toDate());
-        Task.listFromFile(date).forEach(jr::addData);
+        Task.listFromFile(date, listNumbers).forEach(jr::addData);
         return jr.createJSON();
     }
 }

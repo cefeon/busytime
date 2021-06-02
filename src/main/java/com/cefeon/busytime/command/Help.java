@@ -8,7 +8,7 @@ public class Help implements Command {
     final Map<String, String> helpMap = new HashMap<>();
 
     @Override
-    public String execute(String[] args) {
+    public String execute(String[] args, String listNumbers) {
         helpMap.put("add/[task name]", "add new task");
         helpMap.put("sum", "sum time for selected day and task");
         helpMap.put("print", "print tasks for selected day");

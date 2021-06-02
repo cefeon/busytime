@@ -16,10 +16,9 @@ import static java.nio.file.StandardOpenOption.APPEND;
 public class Add implements Command {
     private final Day now = new Day(LocalDateTime.now());
     private final String nowFilename = now.toFileName();
-    private final String nowTime = now.toTime();
-    private final Path file = Paths.get(nowFilename);
     @Override
-    public String execute(String[] args) {
+    public String execute(String[] args, String listNumbers) {
+        Path file = Paths.get(nowFilename + "-" + listNumbers);
         if (args.length == 0) {
             return new JsonError(404,"What task to add? Use: add [task name]").createJSON();
         }
@@ -36,6 +35,7 @@ public class Add implements Command {
         }
 
         try {
+            String nowTime = new Day(LocalDateTime.now()).toTime();
             String task = nowTime + " " + taskName + "\n";
             Files.write(file, task.getBytes(StandardCharsets.UTF_8), APPEND);
             return new JsonResponse("Added task " + taskName + " at " + nowTime).createJSON();

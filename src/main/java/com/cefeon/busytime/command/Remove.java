@@ -16,26 +16,26 @@ import java.util.stream.Stream;
 public class Remove implements Command {
     private final Day now = new Day(LocalDateTime.now());
     private final String nowFilename = now.toFileName();
-    private final Path file = Paths.get(nowFilename);
 
     @Override
-    public String execute(String[] args) {
-        if (args.length == 0) {
+    public String execute(String[] args, String listNumbers) {
+        Path file = Paths.get(nowFilename + "-" + listNumbers);
+        if (args.length != 0) {
             try{
                 removeLastLine(file);
-                return new JsonResponse("Removed last task").createJSON();
+                return new JsonResponse("Removed last task from list " + listNumbers).createJSON();
             } catch (IOException e) {
                 return new JsonError(500, "Error occurred.").createJSON();
             }
-        }
+        } else return new JsonError(404, "List Number not delivered.").createJSON();
 
-        try{
+        /*try{
             String taskName = String.join(" ", args);
             removeTaskByName(file, taskName);
             return new JsonResponse("Removed all tasks named " + taskName).createJSON();
         } catch (IOException e) {
             return new JsonError(500, "Error occurred.").createJSON();
-        }
+        }*/
     }
 
     private void removeTaskByName(Path file, String taskName) throws IOException {

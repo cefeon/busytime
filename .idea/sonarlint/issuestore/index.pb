@@ -7,3 +7,16 @@ M
 src/test/META-INF/MANIFEST.MF,4\4\446118ba1fdc56db80c6da4dce3f7e8824604746
 ?
 settings.gradle,0\5\05efc8b1657769a27696d478ded1e95f38737233
+Z
+*src/main/java/com/cefeon/busytime/Log.java,d\a\da42b66c48384e48821f3f380b4d2f3d012f1f67
+`
+0src/main/java/com/cefeon/busytime/JsonError.java,4\f\4fd44bed35f4548761bde366e62c82ee4594252a
+:
+
+.classpath,3\5\354079a72b91a4280407c16a36f47d1986fd85a5
+>
+17maja2021.txt,1\f\1f613b574e2f33319940517021e1c38554ca5307
+B
+13kwietnia2021.txt,b\a\bae6ce9803ca686feaa36740962b1d03ff68db64
+B
+18kwietnia2021.txt,d\8\d84b456f9a214a29da9e6de40e339ebfea509faf

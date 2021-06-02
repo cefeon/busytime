@@ -23,15 +23,25 @@ public class Main {
             response.type("application/json");
             String commandName = request.params(":commandName");
             Command command = CommandFactory.getCommand(commandName);
-            return command.execute(new String[]{});
+            return command.execute(new String[]{}, "0" );
         });
 
-        Spark.get("/:commandName/:taskName/", (request, response) -> {
+        Spark.get("/:commandName/:taskName/:listNumber", (request, response) -> {
             response.type("application/json");
             String commandName = request.params(":commandName");
             Command command = CommandFactory.getCommand(commandName);
             String[] params = request.params(":taskName").split(" ");
-            return command.execute(params);
+            String listNumber = request.params(":listNumber");
+            return command.execute(params, listNumber);
+        });
+
+        Spark.get("/remove/:listNumber", (request, response) -> {
+            response.type("application/json");
+            String commandName = "remove";
+            Command command = CommandFactory.getCommand(commandName);
+            String listNumber = request.params(":listNumber");
+            String[] params = request.params(":listNumber").split(" ");
+            return command.execute(params, listNumber);
         });
 
         Spark.get("/sum/:date/:taskName", (request, response) -> {
@@ -41,18 +51,15 @@ public class Main {
             Command command = CommandFactory.getCommand(commandName);
             String dateName = date + " " + request.params(":taskName");
             String[] params = dateName.split(" ");
-            return command.execute(params);
+            return command.execute(params,"0" );
         });
 
-
         Spark.get("/:commandName", (request, response) -> {
-            response.type("application/json");
             response.redirect(request.pathInfo()+"/");
             return 0;
         });
 
         Spark.get("/:commandName/:taskName", (request, response) -> {
-            response.type("application/json");
             response.redirect(request.pathInfo()+"/");
             return 0;
         });

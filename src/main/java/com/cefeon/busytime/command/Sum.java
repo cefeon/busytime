@@ -12,7 +12,7 @@ import java.util.List;
 
 public class Sum implements Command {
     @Override
-    public String execute(String[] args) {
+    public String execute(String[] args, String listNumbers) {
         if (args.length == 0) {
             return new JsonError(404, "What day to count? Use: /sum/[date]/[taskname] example: /sum/21-04-2000/task").createJSON();
         }
@@ -23,7 +23,7 @@ public class Sum implements Command {
 
         try {
             String taskName = String.join(" ", Arrays.copyOfRange(args, 1, args.length));
-            int duration = getTaskDuration(new Day(args[0]), taskName);
+            int duration = getTaskDuration(new Day(args[0]), taskName, listNumbers);
             JsonResponse jr = new JsonResponse("Total " + taskName + " duration");
             jr.addData(duration + " minutes");
             return jr.createJSON();
@@ -34,8 +34,8 @@ public class Sum implements Command {
         }
     }
 
-    private int getTaskDuration(Day date, String taskName) throws IOException {
-        List<Task> tasks = Task.listFromFile(date);
+    private int getTaskDuration(Day date, String taskName, String listNumbers) throws IOException {
+        List<Task> tasks = Task.listFromFile(date, listNumbers);
         return tasks.stream().filter(task -> task.getName().equals(taskName)).mapToInt(Task::getDuration).sum();
     }
 }

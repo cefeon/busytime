@@ -42,9 +42,9 @@ public class Task {
         return Integer.parseInt(startTime.split(":")[1]) + hours * 60;
     }
 
-    public static List<Task> listFromFile(Day date) throws IOException {
+    public static List<Task> listFromFile(Day date, String listNumbers) throws IOException {
         String filePath = date.toFileName();
-        Path path = Paths.get(filePath);
+        Path path = Paths.get(filePath+"-"+listNumbers);
         try(Stream<String> stream = Files.lines(path)) {
             List<String> lines = stream.collect(Collectors.toList());
             List<Task> tasks = new ArrayList<>();
